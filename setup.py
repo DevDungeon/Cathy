@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='cathy',
-    version='0.1.6',
+    version='0.1.7',
     description='Discord chat bot using AIML artificial intelligence.',
     url='https://github.com/NanoDano/ChattyCathy',
     author='DevDungeon',
@@ -13,6 +13,13 @@ setup(
         'bin/cathy',
         'bin/cathy.bat',
     ],
+    package_data={
+        'cathy': [
+            'std-startup.xml',
+            'aiml/alice/*.aiml',
+            'aiml/custom/*.aiml'
+        ],
+    },
     zip_safe=False,
     install_requires=[
         'docopt',

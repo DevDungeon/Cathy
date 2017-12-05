@@ -1,9 +1,10 @@
 import discord
+import os
+import pkg_resources
 from discord.ext import commands
 import asyncio
 import aiml
 import requests
-import os
 
 
 STARTUP_FILE = "std-startup.xml"
@@ -17,11 +18,12 @@ class ChattyCathy:
 
         # Load AIML kernel
         self.aiml_kernel = aiml.Kernel()
-        current_dir = os.getcwd()
-        os.chdir(os.path.dirname(os.path.realpath(__file__)))
-        self.aiml_kernel.learn(STARTUP_FILE)
+        initial_dir = os.getcwd()
+        os.chdir(pkg_resources.resource_filename(__name__, '')) # Change directories to load AIML files properly
+        startup_filename = pkg_resources.resource_filename(__name__, STARTUP_FILE)
+        self.aiml_kernel.learn(startup_filename)
         self.aiml_kernel.respond("LOAD AIML B")
-        os.chdir(current_dir)
+        os.chdir(initial_dir)
 
         # Set up Discord client
         self.discord_client = discord.Client()

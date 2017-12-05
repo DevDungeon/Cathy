@@ -9,8 +9,6 @@ Artificial intelligence (AI) chat bot for Discord written in Python
 ## Running
 
     cathy --help
-    
-    
 
 ## TODO
 
