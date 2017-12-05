@@ -1,5 +1,23 @@
-#!/bin/env python
+#!/usr/bin/env python
+"""Cathy.
+
+Discord chat bot using AIML artificial intelligence
+
+Usage:
+  blackhole <host> <port> [--echo] [--debug] [--http]
+
+Options:
+  --arg1        Sample arg 1
+  -h --help     Show this screen.
+  --version     Show version.
+"""
+
+from docopt import docopt
 from cathy import ChattyCathy
+
+args = docopt(__doc__)
+
+print('Arg1:', args['<arg1>'])
 
 bot = ChattyCathy()
 bot.run()
