@@ -1,0 +1,5 @@
+#!/bin/env python
+from cathy import ChattyCathy
+
+bot = ChattyCathy()
+bot.run()
