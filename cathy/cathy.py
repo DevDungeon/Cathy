@@ -6,7 +6,7 @@
 
 # Listen and chat
 
-class ChattyCathy():
+class ChattyCathy:
     def __init__(self):
         print("Cathy initializing...")
 

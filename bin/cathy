@@ -4,7 +4,7 @@
 Discord chat bot using AIML artificial intelligence
 
 Usage:
-  blackhole <host> <port> [--echo] [--debug] [--http]
+  cathy [--arg1]
 
 Options:
   --arg1        Sample arg 1
@@ -13,11 +13,11 @@ Options:
 """
 
 from docopt import docopt
-from cathy import ChattyCathy
+from cathy.cathy import ChattyCathy
 
 args = docopt(__doc__)
 
-print('Arg1:', args['<arg1>'])
+print('Arg1:', args['--arg1'])
 
 bot = ChattyCathy()
 bot.run()
