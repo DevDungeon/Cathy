@@ -8,8 +8,11 @@ setup(
     author='DevDungeon',
     author_email='nanodano@devdungeon.com',
     license='GPL-3.0',
-    packages=['cathy'],  # The folder with the real code
-    scripts=['bin/cathy'],  # List of executable scripts to include
+    packages=['cathy'],
+    scripts=[
+        'bin/cathy',
+        'bin/cathy.bat',
+    ],
     zip_safe=False,
     install_requires=[
         'docopt',
