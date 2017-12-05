@@ -4,10 +4,11 @@
 Discord chat bot using AIML artificial intelligence
 
 Usage:
-  cathy [--arg1]
+  cathy <channel> <token>
 
 Options:
-  --arg1        Sample arg 1
+  <channel>     Name of channel to chat in
+  <token>       Bot's Discord API token
   -h --help     Show this screen.
   --version     Show version.
 """
@@ -17,7 +18,8 @@ from cathy.cathy import ChattyCathy
 
 args = docopt(__doc__)
 
-print('Arg1:', args['--arg1'])
+print('Channel: ', args['<channel>'])
+print('Token: ', args['<token>'])
 
-bot = ChattyCathy()
+bot = ChattyCathy(args['<channel>'], args['<token>'])
 bot.run()

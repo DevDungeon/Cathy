@@ -10,6 +10,13 @@ Artificial intelligence (AI) chat bot for Discord written in Python
 
     cathy --help
     
+    
+
+## TODO
+
+Take an arg to specify aiml dir or get relative import working
+
+    
 ## Contact
 
 nanodano@devdungeon.com
