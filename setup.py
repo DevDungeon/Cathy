@@ -2,9 +2,9 @@ from setuptools import setup
 
 setup(
     name='cathy',
-    version='0.1.7',
+    version='1.0.0',
     description='Discord chat bot using AIML artificial intelligence.',
-    url='https://github.com/NanoDano/ChattyCathy',
+    url='https://github.com/DevDungeon/ChattyCathy',
     author='DevDungeon',
     author_email='nanodano@devdungeon.com',
     license='GPL-3.0',

@@ -10,7 +10,6 @@ Options:
   <channel>     Name of channel to chat in
   <token>       Bot's Discord API token
   -h --help     Show this screen.
-  --version     Show version.
 """
 
 from docopt import docopt
