@@ -1,6 +1,11 @@
 # ChattyCathy
 Artificial intelligence (AI) chat bot for Discord written in Python
 
+# Project Home Page
+
+https://www.devdungeon.com/content/chatty-cathy
+
+Visit the project page on DevDungeon.com for more information.
 
 ## Installation
 
