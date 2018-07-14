@@ -1,5 +1,6 @@
 import discord
 import os
+import random
 import pkg_resources
 from discord.ext import commands
 import asyncio
@@ -55,6 +56,8 @@ class ChattyCathy:
                 yield from self.discord_client.process_commands(message)
             else:
                 aiml_response = self.aiml_kernel.respond(message.content)
+                yield from self.discord_client.send_typing(message.channel)
+                yield from asyncio.sleep(random.randint(1,3))
                 yield from self.discord_client.send_message(message.channel, aiml_response)
 
     def run(self):
