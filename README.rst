@@ -7,6 +7,10 @@ Artificial intelligence (AI) chat bot for Discord written in Python
    :target: https://cathy-docs.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
+.. image:: https://badge.fury.io/py/cathy.svg
+   :target: https://badge.fury.io/py/cathy
+   :alt: Cathy on pypi
+
 Documentation
 =============
 
