@@ -1,3 +1,8 @@
+"""
+Cathy AI Discord Chat Bot
+
+Written in Python 3 using AIML chat library.
+"""
 import discord
 import os
 import random
@@ -12,7 +17,17 @@ BOT_PREFIX = ('?', '!')
 
 
 class ChattyCathy:
+    """
+    Class that contains all of the bot logic
+    """
+    
     def __init__(self, channel_name, bot_token):
+        """
+        Initialize the bot using the Discord token and channel name to chat in.
+
+        :param channel_name: Only chats in this channel. No hashtag included.
+        :param bot_token: Full secret bot token
+        """
         self.channel_name = channel_name
         self.token = bot_token
 
