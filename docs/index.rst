@@ -21,7 +21,6 @@ Links
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 * Source code: https://github.com/DevDungeon/ChattyCathy
 * Home page: https://www.devdungeon.com/content/chatty-cathy
