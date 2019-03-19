@@ -19,6 +19,11 @@ Optionally, build the documentation from the ``docs/`` folder::
   make html
 
 
+Source code
+===========
+
+https://github.com/DevDungeon/ChattyCathy
+
 Contact
 =======
 

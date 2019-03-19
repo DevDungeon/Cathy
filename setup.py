@@ -9,7 +9,7 @@ def readme_file_contents():
 
 setup(
     name='cathy',
-    version='1.1.1',
+    version='1.1.2',
     description='Discord chat bot using AIML artificial intelligence.',
     long_description=readme_file_contents(),
     url='https://github.com/DevDungeon/ChattyCathy',
