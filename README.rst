@@ -26,7 +26,7 @@ Optionally, build the documentation from the ``docs/`` folder::
 Source code
 ===========
 
-https://github.com/DevDungeon/ChattyCathy
+https://github.com/DevDungeon/Cathy
 
 Contact
 =======
