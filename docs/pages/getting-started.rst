@@ -1,8 +1,8 @@
 =====================
-What is Chatty Cathy?
+What is Cathy?
 =====================
 
-Chatty Cathy is an artificial intelligence (AI) chat bot for Discord server.
+Cathy is an artificial intelligence (AI) chat bot for Discord server.
 It is easily extended with new commands. It is written in Python 3.
 You can invite the DevDungeon Chatty Cathy to your server
 or run your own version.
