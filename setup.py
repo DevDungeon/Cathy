@@ -1,17 +1,11 @@
 from setuptools import setup
 
 
-def readme_file_contents():
-    with open('README.rst') as f:
-        data = f.read()
-    return data
-
-
 setup(
     name='cathy',
-    version='1.1.2',
+    version='1.1.3',
     description='Discord chat bot using AIML artificial intelligence.',
-    long_description=readme_file_contents(),
+    long_description=open('README.rst').read(),
     url='https://github.com/DevDungeon/ChattyCathy',
     author='DevDungeon',
     author_email='nanodano@devdungeon.com',
@@ -29,10 +23,6 @@ setup(
         ],
     },
     zip_safe=False,
-    install_requires=[
-        'docopt',
-        'python-aiml',
-        'discord.py',
-        'requests'
-    ]
+    install_requires=open('requirements.txt').read().splitlines(),
+    python_requires='<3.7',
 )
