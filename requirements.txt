@@ -1,4 +1,0 @@
-docopt
-python-aiml
-discord.py==0.16.12
-requests

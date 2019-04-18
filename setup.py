@@ -1,9 +1,8 @@
 from setuptools import setup
 
-
 setup(
     name='cathy',
-    version='1.1.3',
+    version='1.1.5',
     description='Discord chat bot using AIML artificial intelligence.',
     long_description=open('README.rst').read(),
     url='https://github.com/DevDungeon/ChattyCathy',
@@ -23,6 +22,11 @@ setup(
         ],
     },
     zip_safe=False,
-    install_requires=open('requirements.txt').read().splitlines(),
+    install_requires=[
+        'docopt',
+        'python-aiml',
+        'discord.py==0.16.12',
+        'requests',
+    ],
     python_requires='<3.7',
 )
