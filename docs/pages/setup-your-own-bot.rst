@@ -4,7 +4,7 @@ Run your own bot
 
 Run your own bot by following the instructions below.
 
-Note that the `cathy` package requires Python < 3.7 and `discord.py` of version `0.16.12`. Python 3.7 introduced backwards incompatible changes with the `discord.py` package version being used. Python 3.6.x recommended.
+Note that the `cathy` package requires Python < 3.7 and ``discord.py`` of version ``0.16.12``. Python 3.7 introduced backwards incompatible changes with the `discord.py` package version being used. Python 3.6.x recommended.
 
 Installation
 ============
