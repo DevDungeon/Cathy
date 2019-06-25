@@ -95,6 +95,8 @@ class ChattyCathy:
 
             try:
                 aiml_response = self.aiml_kernel.respond(message.content)
+                aiml_response = aiml_response.replace("://", "")
+                aiml_response = "%s: %s" % (message.author, aiml_response)
 
                 self.logger.info("[%s] (%s) %s: %s\nResponse: %s" %
                                  (now.isoformat(), message.server.name, message.author, message.content, aiml_response))
