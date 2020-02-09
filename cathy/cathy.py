@@ -44,6 +44,7 @@ class ChattyCathy:
         initial_dir = os.getcwd()
         os.chdir(pkg_resources.resource_filename(__name__, ''))  # Change directories to load AIML files properly
         startup_filename = pkg_resources.resource_filename(__name__, STARTUP_FILE)
+        self.aiml_kernel.setBotPredicate("name", "Cathy")
         self.aiml_kernel.learn(startup_filename)
         self.aiml_kernel.respond("LOAD AIML B")
         os.chdir(initial_dir)
