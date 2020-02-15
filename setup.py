@@ -22,9 +22,20 @@ setup(
     },
     zip_safe=False,
     install_requires=[
-        'docopt',
-        'python-aiml',
-        'discord.py',
-        'requests'
-    ]
+        'aiohttp==1.0.5',
+        'async-timeout==3.0.0',
+        'cathy==2.1.1',
+        'certifi==2018.4.16',
+        'chardet==3.0.4',
+        'discord.py==0.16.12',
+        'docopt==0.6.2',
+        'idna==2.7',
+        'multidict==4.3.1',
+        'pkg-resources==0.0.0',
+        'python-aiml==0.9.1',
+        'requests==2.19.1',
+        'urllib3==1.23',
+        'websockets==3.4',
+    ],
+    python_requires='==3.6.8',
 )

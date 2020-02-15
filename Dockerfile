@@ -1,6 +1,7 @@
-# Run cathy in a docker container
-
-FROM python:3.6-alpine
+# Build with: `docker build . --tag cathy`
+# Run with: `docker run cathy`
+# Run with: `docker run cathy chat-with-cathy $TOKEN log.txt db.db`
+FROM python:3.6.8-alpine
 
 RUN apk add build-base
 
