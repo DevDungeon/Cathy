@@ -7,7 +7,7 @@ FROM python:3.6.8-alpine
 
 RUN apk add build-base
 
-WORKDIR cathy
+WORKDIR /cathy
 
 # Copy only the necessary files
 COPY ./bin ./bin
