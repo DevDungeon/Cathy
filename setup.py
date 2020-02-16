@@ -31,7 +31,7 @@ setup(
         'docopt==0.6.2',
         'idna==2.7',
         'multidict==4.3.1',
-        'pkg-resources==0.0.0',
+        #'pkg-resources',
         'python-aiml==0.9.1',
         'requests==2.19.1',
         'urllib3==1.23',
