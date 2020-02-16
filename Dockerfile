@@ -1,6 +1,8 @@
 # Build with: `docker build . --tag cathy`
 # Run with: `docker run cathy`
 # Run with: `docker run cathy chat-with-cathy $TOKEN log.txt db.db`
+# Attach to a running container and get a shell
+# `docker exec -it <container_id> /bin/sh`
 FROM python:3.6.8-alpine
 
 RUN apk add build-base
