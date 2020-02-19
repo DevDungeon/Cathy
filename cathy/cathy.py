@@ -52,11 +52,10 @@ class ChattyCathy:
             print("Bot Online!")
             print("Name: {}".format(self.discord_client.user.name))
             print("ID: {}".format(self.discord_client.user.id))
-            yield from self.discord_client.change_presence(game=discord.Game(name='Chatting with Humans'))
+            yield from self.discord_clientchange_presence(activity = discord.Game(name = 'Chatting with Humans'))
 
         @self.discord_client.event
-        @asyncio.coroutine
-        def on_message(message):
+        async def on_message(message):
             if message.author.bot or str(message.channel) != self.channel_name:
                 return
 
@@ -68,12 +67,12 @@ class ChattyCathy:
 
             if message.content.startswith(BOT_PREFIX):
                 # Pass on to rest of the client commands
-                yield from self.discord_client.process_commands(message)
+                await self.discord_client.process_commands(message)
             else:
                 aiml_response = self.aiml_kernel.respond(message.content)
-                yield from self.discord_client.send_typing(message.channel)
-                yield from asyncio.sleep(random.randint(1,3))
-                yield from self.discord_client.send_message(message.channel, aiml_response)
+                async with message.channel.typing():
+                    await asyncio.sleep(random.randint(1, 3))
+                    await message.channel.send(aiml_response)
 
     def run(self):
         self.discord_client.run(self.token)
