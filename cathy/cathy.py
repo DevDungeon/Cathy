@@ -40,21 +40,21 @@ class ChattyCathy:
         self.aiml_kernel.respond("LOAD AIML B")
         os.chdir(initial_dir)
 
-        # Set up Discord client
-        self.discord_client = commands.Bot(command_prefix=BOT_PREFIX)
+        # Set up Discord bot
+        self.discord_bot = commands.Bot(command_prefix=BOT_PREFIX)
         self.setup()
 
     def setup(self):
 
-        @self.discord_client.event
+        @self.discord_bot.event
         @asyncio.coroutine
         def on_ready():
             print("Bot Online!")
-            print("Name: {}".format(self.discord_client.user.name))
-            print("ID: {}".format(self.discord_client.user.id))
-            yield from self.discord_clientchange_presence(activity = discord.Game(name = 'Chatting with Humans'))
+            print("Name: {}".format(self.discord_bot.user.name))
+            print("ID: {}".format(self.discord_bot.user.id))
+            yield from self.discord_bot.change_presence(activity = discord.Game(name = 'Chatting with Humans'))
 
-        @self.discord_client.event
+        @self.discord_bot.event
         @asyncio.coroutine
         def on_message(message):
             if message.author.bot or str(message.channel) != self.channel_name:
@@ -67,8 +67,8 @@ class ChattyCathy:
             print("Message: " + str(message.content))
 
             if message.content.startswith(BOT_PREFIX):
-                # Pass on to rest of the client commands
-                yield from self.discord_client.process_commands(message)
+                # Pass on to rest of the bot commands
+                yield from self.discord_bot.process_commands(message)
             else:
                 aiml_response = self.aiml_kernel.respond(message.content)
                 async with message.channel.typing():
@@ -76,4 +76,4 @@ class ChattyCathy:
                     yield from message.channel.send(aiml_response)
 
     def run(self):
-        self.discord_client.run(self.token)
+        self.discord_bot.run(self.token)
