@@ -3,14 +3,13 @@ Cathy AI Discord Chat Bot
 
 Written in Python 3 using AIML chat library.
 """
+import aiml
+import asyncio
 import discord
 import os
-import random
 import pkg_resources
+import random
 from discord.ext import commands
-import asyncio
-import aiml
-
 
 STARTUP_FILE = "std-startup.xml"
 BOT_PREFIX = ('?', '!')
@@ -47,16 +46,14 @@ class ChattyCathy:
     def setup(self):
 
         @self.discord_bot.event
-        @asyncio.coroutine
-        def on_ready():
+        async def on_ready():
             print("Bot Online!")
             print("Name: {}".format(self.discord_bot.user.name))
             print("ID: {}".format(self.discord_bot.user.id))
-            yield from self.discord_bot.change_presence(activity = discord.Game(name = 'Chatting with Humans'))
+            await self.discord_bot.change_presence(activity = discord.Game(name = 'Chatting with Humans'))
 
         @self.discord_bot.event
-        @asyncio.coroutine
-        def on_message(message):
+        async def on_message(message):
             if message.author.bot or str(message.channel) != self.channel_name:
                 return
 
@@ -68,12 +65,12 @@ class ChattyCathy:
 
             if message.content.startswith(BOT_PREFIX):
                 # Pass on to rest of the bot commands
-                yield from self.discord_bot.process_commands(message)
+                await self.discord_bot.process_commands(message)
             else:
                 aiml_response = self.aiml_kernel.respond(message.content)
                 async with message.channel.typing():
-                    yield from asyncio.sleep(random.randint(1, 3))
-                    yield from message.channel.send(aiml_response)
+                    await asyncio.sleep(random.randint(1, 3))
+                    await message.channel.send(aiml_response)
 
     def run(self):
         self.discord_bot.run(self.token)
