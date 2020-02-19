@@ -4,7 +4,7 @@ Run your own bot
 
 Run your own bot by following the instructions below.
 
-Note that the `cathy` package requires Python < 3.7 and ``discord.py`` of version ``0.16.12``. Python 3.7 introduced backwards incompatible changes with the `discord.py` package version being used. Python 3.6.x recommended.
+Note that the `cathy` package requires Python 3.7+ and ``discord.py`` of version ``1.2.5+``. Python 3.7 introduced backwards incompatible changes with the `discord.py` package version being used. Python 3.6.x recommended.
 
 Installation
 ============
@@ -59,7 +59,7 @@ If you don't already know how to get a token, you need to follow a few steps:
 How can I create my own bot?
 ============================
 
-If you want to create your own bot, you can follow some ofthese tutorials on
+If you want to create your own bot, you can follow some of these tutorials on
 DevDungeon.com
 
 - https://www.devdungeon.com/tags/aiml
