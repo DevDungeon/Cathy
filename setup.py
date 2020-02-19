@@ -21,12 +21,12 @@ setup(
             'aiml/custom/*.aiml'
         ],
     },
-    zip_safe=False,
-    install_requires=[
+    zip_safe = False,
+    install_requires = [
         'docopt',
         'python-aiml',
         'discord.py>=1.2.5',
         'requests',
     ],
-    python_requires='<3.7',
+    python_requires = '>=3.7',
 )
