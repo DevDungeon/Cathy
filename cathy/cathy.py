@@ -55,7 +55,8 @@ class ChattyCathy:
             yield from self.discord_clientchange_presence(activity = discord.Game(name = 'Chatting with Humans'))
 
         @self.discord_client.event
-        async def on_message(message):
+        @asyncio.coroutine
+        def on_message(message):
             if message.author.bot or str(message.channel) != self.channel_name:
                 return
 
@@ -67,12 +68,12 @@ class ChattyCathy:
 
             if message.content.startswith(BOT_PREFIX):
                 # Pass on to rest of the client commands
-                await self.discord_client.process_commands(message)
+                yield from self.discord_client.process_commands(message)
             else:
                 aiml_response = self.aiml_kernel.respond(message.content)
                 async with message.channel.typing():
-                    await asyncio.sleep(random.randint(1, 3))
-                    await message.channel.send(aiml_response)
+                    yield from asyncio.sleep(random.randint(1, 3))
+                    yield from message.channel.send(aiml_response)
 
     def run(self):
         self.discord_client.run(self.token)
