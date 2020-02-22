@@ -143,7 +143,7 @@ class ChattyCathy:
                 aiml_response = "%s: %s" % (message.author.mention, aiml_response)
 
                 self.logger.info("[%s] (%s) %s: %s\nResponse: %s" %
-                                 (now.isoformat(), message.server.name, message.author, message.content, aiml_response))
+                                 (now.isoformat(), message.guild.name, message.author, message.content, aiml_response))
                 self.insert_chat_log(now, message, aiml_response)
 
                 await self.discord_bot.send_typing(message.channel)
@@ -161,7 +161,7 @@ class ChattyCathy:
 
     def insert_chat_log(self, now, message, aiml_response):
         self.cursor.execute('INSERT INTO chat_log VALUES (?, ?, ?, ?, ?)',
-                            (now.isoformat(), message.server.id, message.author.id,
+                            (now.isoformat(), message.guild.id, message.author.id,
                              str(message.content), aiml_response))
 
         # Add user if necessary
@@ -172,10 +172,10 @@ class ChattyCathy:
                 (message.author.id, message.author.name, datetime.now().isoformat()))
 
         # Add server if necessary
-        self.cursor.execute('SELECT id FROM servers WHERE id=?', (message.server.id,))
+        self.cursor.execute('SELECT id FROM servers WHERE id=?', (message.guild.id,))
         if not self.cursor.fetchone():
             self.cursor.execute(
                 'INSERT INTO servers VALUES (?, ?, ?)',
-                (message.server.id, message.server.name, datetime.now().isoformat()))
+                (message.guild.id, message.guild.name, datetime.now().isoformat()))
 
         self.db.commit()
