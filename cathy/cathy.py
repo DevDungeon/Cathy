@@ -3,14 +3,14 @@ Cathy AI Discord Chat Bot
 
 Written in Python 3 using AIML chat library.
 """
+import aiml
+import asyncio
 from datetime import datetime
 import discord
 import os
-import random
 import pkg_resources
+import random
 from discord.ext import commands
-import asyncio
-import aiml
 import logging
 import logging.config
 import sqlite3
@@ -66,7 +66,7 @@ class ChattyCathy:
         self.logger.info("[*] Initializing Discord bot...")
         self.channel_name = channel_name
         self.token = bot_token
-        self.discord_client = commands.Bot(command_prefix=BOT_PREFIX)
+        self.discord_bot = commands.Bot(command_prefix=BOT_PREFIX)
         self.setup_discord_events()
         self.logger.info("[+] Done initializing Discord bot.")
 
@@ -86,17 +86,16 @@ class ChattyCathy:
 
     def setup_discord_events(self):
 
-        @self.discord_client.event
-        @asyncio.coroutine
-        def on_ready():
+        @self.discord_bot.event
+        async def on_ready():
+            print("Bot Online!")
             self.logger.info("[+] Bot connected to Discord")
-            self.logger.info("[*] Name: {}".format(self.discord_client.user.name))
-            self.logger.info("[*] ID: {}".format(self.discord_client.user.id))
-            yield from self.discord_client.change_presence(game=discord.Game(name='Chatting with Humans'))
+            self.logger.info("[*] Name: {}".format(self.discord_bot.user.name))
+            self.logger.info("[*] ID: {}".format(self.discord_bot.user.id))
+            await self.discord_bot.change_presence(activity = discord.Game(name = 'Chatting with Humans'))
 
-        @self.discord_client.event
-        @asyncio.coroutine
-        def on_message(message):
+        @self.discord_bot.event
+        async def on_message(message):
             if message.author.bot or str(message.channel) != self.channel_name:
                 return
 
@@ -105,6 +104,15 @@ class ChattyCathy:
                 return
 
             now = datetime.now()
+
+            if message.content.startswith(BOT_PREFIX):
+                # Pass on to rest of the bot commands
+                await self.discord_bot.process_commands(message)
+            else:
+                aiml_response = self.aiml_kernel.respond(message.content)
+                async with message.channel.typing():
+                    await asyncio.sleep(random.randint(1, 3))
+                    await message.channel.send(aiml_response)
 
             try:
                 aiml_response = self.aiml_kernel.respond(message.content)
@@ -125,7 +133,7 @@ class ChattyCathy:
 
     def run(self):
         self.logger.info("[*] Attempting to run bot...")
-        self.discord_client.run(self.token)
+        self.discord_bot.run(self.token)
         self.logger.info("[*] Bot run.")
 
     def insert_chat_log(self, now, message, aiml_response):
@@ -148,3 +156,4 @@ class ChattyCathy:
                 (message.server.id, message.server.name, datetime.now().isoformat()))
 
         self.db.commit()
+

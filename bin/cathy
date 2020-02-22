@@ -15,6 +15,7 @@ Options:
 """
 
 from docopt import docopt
+
 from cathy.cathy import ChattyCathy
 
 args = docopt(__doc__)
