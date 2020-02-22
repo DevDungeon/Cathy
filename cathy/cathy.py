@@ -146,7 +146,7 @@ class ChattyCathy:
                                  (now.isoformat(), message.guild.name, message.author, message.content, aiml_response))
                 self.insert_chat_log(now, message, aiml_response)
 
-                await self.discord_bot.send_typing(message.channel)
+                await message.channel.trigger_typing()
                 await asyncio.sleep(random.randint(1, 3))
                 await self.discord_bot.send_message(message.channel, aiml_response)
             except discord.HTTPException as e:
