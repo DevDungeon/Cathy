@@ -132,11 +132,6 @@ class ChattyCathy:
                 await self.discord_bot.process_commands(message)
                 return
 
-            aiml_response = self.aiml_kernel.respond(message.content)
-            async with message.channel.typing():
-                await asyncio.sleep(random.randint(1, 3))
-                await message.channel.send(aiml_response)
-
             try:
                 aiml_response = self.aiml_kernel.respond(message.content)
                 aiml_response = aiml_response.replace("://", "")
@@ -146,9 +141,10 @@ class ChattyCathy:
                                  (now.isoformat(), message.guild.name, message.author, message.content, aiml_response))
                 self.insert_chat_log(now, message, aiml_response)
 
-                await message.channel.trigger_typing()
-                await asyncio.sleep(random.randint(1, 3))
-                await self.discord_bot.send_message(message.channel, aiml_response)
+                async with message.channel.typing():
+                    await asyncio.sleep(random.randint(1, 3))
+                    await message.channel.send(aiml_response)
+
             except discord.HTTPException as e:
                 self.logger.error("[-] Discord HTTP Error: %s" % e)
             except Exception as e:
