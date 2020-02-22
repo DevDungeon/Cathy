@@ -35,7 +35,7 @@ setup(
         #'pkg-resources',
         'python-aiml==0.9.1',
         'requests==2.19.1',
-        'urllib3==1.23',
+        'urllib3==1.24.2',
         'websockets==3.4',
     ],
     python_requires='==3.6.8',
