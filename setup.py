@@ -1,16 +1,16 @@
 from setuptools import setup
 
 setup(
-    name = 'cathy',
-    version = '1.2.0',
-    description = 'Discord chat bot using AIML artificial intelligence.',
-    long_description = open('README.rst').read(),
-    url = 'https://github.com/DevDungeon/ChattyCathy',
-    author = 'DevDungeon',
-    author_email = 'nanodano@devdungeon.com',
-    license = 'GPL-3.0',
-    packages = ['cathy'],
-    scripts = [
+    name='cathy',
+    version='2.1.1',
+    description='Discord chat bot using AIML artificial intelligence.',
+    long_description=open('README.rst').read(),
+    url='https://github.com/DevDungeon/ChattyCathy',
+    author='DevDungeon',
+    author_email='nanodano@devdungeon.com',
+    license='GPL-3.0',
+    packages=['cathy'],
+    scripts=[
         'bin/cathy',
         'bin/cathy.bat',
     ],

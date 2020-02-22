@@ -4,11 +4,13 @@
 Discord chat bot using AIML artificial intelligence
 
 Usage:
-  cathy <channel> <token>
+  cathy <channel> <token> <logfile> <database>
 
 Options:
-  <channel>     Name of channel to chat in
+  <channel>     Name of channel to chat in. E.g. "general"
   <token>       Bot's Discord API token
+  <logfile>     Path to log file. E.g. "$HOME/cathy.log"
+  <database>    Path to database file. E.g. "$HOME/cathy.sqlite"
   -h --help     Show this screen.
 """
 
@@ -18,8 +20,10 @@ from cathy.cathy import ChattyCathy
 
 args = docopt(__doc__)
 
-print('Channel: ', args['<channel>'])
-print('Token: ', args['<token>'])
+print('Channel: %s' % args['<channel>'])
+print('Token: %s' % args['<token>'])
+print('Log file: %s' % args['<logfile>'])
+print('Database: %s' % args['<database>'])
 
-bot = ChattyCathy(args['<channel>'], args['<token>'])
+bot = ChattyCathy(args['<channel>'], args['<token>'], args['<logfile>'], args['<database>'])
 bot.run()
