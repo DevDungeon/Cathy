@@ -34,7 +34,7 @@ setup(
         'multidict==4.3.1',
         #'pkg-resources',
         'python-aiml==0.9.1',
-        'requests==2.19.1',
+        'requests==2.20.0',
         'urllib3==1.23',
         'websockets==3.4',
     ],
