@@ -1,5 +1,9 @@
-from datetime import datetime
+"""
+Cathy AI Discord Chat Bot
 
+Written in Python 3 using AIML chat library.
+"""
+from datetime import datetime
 import discord
 import os
 import random
@@ -25,6 +29,14 @@ servers (id, name, first_seen)"""
 class ChattyCathy:
 
     def __init__(self, channel_name, bot_token, log_file, database):
+        """
+        Initialize the bot using the Discord token and channel name to chat in.
+
+        :param channel_name: Only chats in this channel. No hashtag included.
+        :param bot_token: Full secret bot token
+        :param log_file: File for logging details
+        :param database: Path of sqlite file to use
+        """
         self.log_file = log_file
         self.database = database
 
@@ -136,5 +148,3 @@ class ChattyCathy:
                 (message.server.id, message.server.name, datetime.now().isoformat()))
 
         self.db.commit()
-
-

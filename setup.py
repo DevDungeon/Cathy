@@ -4,6 +4,7 @@ setup(
     name='cathy',
     version='2.1.1',
     description='Discord chat bot using AIML artificial intelligence.',
+    long_description=open('README.rst').read(),
     url='https://github.com/DevDungeon/ChattyCathy',
     author='DevDungeon',
     author_email='nanodano@devdungeon.com',
