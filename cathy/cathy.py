@@ -106,7 +106,7 @@ class ChattyCathy:
                 self.aiml_kernel.resetBrain()
                 self.setup_aiml()
             else:
-                await ctx.send(f'Sorry, I can only reset once per hour and I was last reset on {self.last_reset_time}')
+                await ctx.send(f'Sorry, I can only reset once per hour and I was last reset on {self.last_reset_time} UTC')
 
         @self.discord_bot.event
         async def on_ready():
