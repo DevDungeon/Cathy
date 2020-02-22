@@ -10,7 +10,7 @@ RUN apk add build-base
 WORKDIR /cathy
 
 # Copy only the necessary files
-COPY ./cathy .
+COPY ./cathy ./cathy
 COPY ./README.rst .
 COPY ./setup.py .
 
