@@ -3,15 +3,15 @@
 # Run with: `docker run cathy chat-with-cathy $TOKEN log.txt db.db`
 # Attach to a running container and get a shell
 # `docker exec -it <container_id> /bin/sh`
-FROM python:3.6.8-alpine
+FROM python:3.8.1-alpine
 
 RUN apk add build-base
 
 WORKDIR /cathy
 
 # Copy only the necessary files
-COPY ./bin ./bin
-COPY ./cathy ./cathy
+COPY ./cathy .
+COPY ./README.rst .
 COPY ./setup.py .
 
 RUN python3 setup.py install

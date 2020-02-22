@@ -1,0 +1,17 @@
+# Systemd service file for Cathy
+# Copy it to /etc/systemd/system/cathy.service
+# Control it with: systemctl start|stop|status cathy
+
+[Unit]
+Description=Chatty Cathy
+After=network.target
+
+[Service]
+Type=simple
+User=cathy
+WorkingDirectory=/opt/cathy
+ExecStart=/opt/cathy/systemd/runcathy.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
