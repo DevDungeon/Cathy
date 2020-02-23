@@ -10,7 +10,7 @@ After=network.target
 Type=simple
 User=cathy
 WorkingDirectory=/opt/cathy
-ExecStart=/opt/cathy/systemd/runcathy.sh
+ExecStart=/usr/local/bin/runcathy.sh
 Restart=always
 
 [Install]
