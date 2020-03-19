@@ -24,7 +24,7 @@ setup(
     },
     zip_safe=False,
     install_requires=[
-        'docopt',
+        """'docopt',
         'python-aiml',
         'discord.py>=1.2.5',
         'requests',
@@ -44,7 +44,6 @@ setup(
         urllib3==1.25.8
         websockets==8.1
         yarl==1.4.2
-        """
     ],
     python_requires='>=3.7',
 )
