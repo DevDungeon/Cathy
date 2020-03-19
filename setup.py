@@ -23,11 +23,6 @@ setup(
         ],
     },
     zip_safe=False,
-        """'docopt',
-        'python-aiml',
-        'discord.py>=1.2.5',
-        'requests',
-        """
     install_requires=[
         'aiohttp==3.6.2',
         'async-timeout==3.0.1',
