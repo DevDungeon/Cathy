@@ -23,13 +23,12 @@ setup(
         ],
     },
     zip_safe=False,
-    install_requires=[
         """'docopt',
         'python-aiml',
         'discord.py>=1.2.5',
         'requests',
         """
-        # Full frozen requirements:
+    install_requires=[
         'aiohttp==3.6.2',
         'async-timeout==3.0.1',
         'attrs==19.3.0',
