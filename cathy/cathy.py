@@ -142,7 +142,7 @@ class ChattyCathy:
             try:
                 aiml_response = self.aiml_kernel.respond(text)
                 aiml_response = aiml_response.replace("://", "")
-                aiml_response = "%s: %s" % (message.author.mention, aiml_response)
+                aiml_response = "`@%s`: %s" % (message.author.name, aiml_response)
                 aiml_response = aiml_response.encode('ascii', 'ignore').decode('ascii')  # Remove any unicode to prevent errors/malforming
 
                 if len(aiml_response) > 1800:  # Protect against discord message limit of 2000 chars
