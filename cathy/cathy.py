@@ -3,8 +3,6 @@ Cathy AI Discord Chat Bot
 
 Written in Python 3 using AIML chat library.
 """
-import time
-
 import aiml
 import asyncio
 from datetime import datetime, timedelta
@@ -117,27 +115,20 @@ class ChattyCathy:
             self.logger.info("[*] Name: {}".format(self.discord_bot.user.name))
             self.logger.info("[*] ID: {}".format(self.discord_bot.user.id))
 
-            presence_update_complete = False
-            while not presence_update_complete:
-                """
-                Sometimes the bot will fail to set the presence because it has not connected to all the guilds yet.
-                This causes the bot to fail startup and then systemd kicks it off again.  
+            """
+            Sometimes the bot will fail to set the presence because it has not connected to all the guilds yet.
+            This causes the bot to fail startup and then systemd kicks it off again.  
 
-                File "/opt/cathy/venv/lib64/python3.7/site-packages/discord/state.py", line 358, in _delay_ready
-                  for guild, unavailable in self._ready_state.guilds:
-                AttributeError: 'ConnectionState' object has no attribute '_ready_state'
-                
-                To prevent this, loop until it is done.
-                """
-                try:
-                    await self.discord_bot.change_presence(activity=discord.Game(name='Chatting with Humans'))
-                    presence_update_complete = True
-                except Exception as e:
-                    self.logger.error(f"[-] Error setting bot presence: {e}")
-                    time.sleep(3)
-
-
-
+            File "/opt/cathy/venv/lib64/python3.7/site-packages/discord/state.py", line 358, in _delay_ready
+              for guild, unavailable in self._ready_state.guilds:
+            AttributeError: 'ConnectionState' object has no attribute '_ready_state'
+            
+            To prevent this, loop until it is done.
+            """
+            try:
+                await self.discord_bot.change_presence(activity=discord.Game(name='Chatting with Humans'))
+            except Exception as e:
+                self.logger.error(f"[-] Error setting bot presence!! : {e}")
 
         @self.discord_bot.event
         async def on_message(message):
