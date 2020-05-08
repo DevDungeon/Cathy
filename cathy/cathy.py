@@ -140,9 +140,6 @@ class ChattyCathy:
                 self.logger.error("[-] Empty message received.")
                 return
 
-
-            now = datetime.now()
-
             if message.content.startswith(self.BOT_PREFIX):
                 # Pass on to rest of the bot commands
                 await self.discord_bot.process_commands(message)
@@ -150,19 +147,18 @@ class ChattyCathy:
 
             # Clean out the message
             text = message.content
-            for ch in  ['/', "'", ".", "\\", "(", ")", '"', '\n']:
+            for ch in ['/', "'", ".", "\\", "(", ")", '"', '\n']:
                 text = text.replace(ch, '')
-
 
             try:
                 aiml_response = self.aiml_kernel.respond(text)
                 aiml_response = aiml_response.replace("://", "")
-                aiml_response = "`@%s`: %s" % (message.author.name, aiml_response)
-                aiml_response = aiml_response.encode('ascii', 'ignore').decode('ascii')  # Remove any unicode to prevent errors/malforming
+                aiml_response = "`@%s`: %s" % (message.author.name, aiml_response.encode('ascii', 'ignore').decode('ascii'))  # Remove any unicode to prevent errors/malforming)
 
                 if len(aiml_response) > 1800:  # Protect against discord message limit of 2000 chars
                     aiml_response = aiml_response[0:1800]
 
+                now = datetime.now()
                 self.logger.info("[%s] (%s) %s: %s\nResponse: %s" %
                                  (now.isoformat(), message.guild.name, message.author, text, aiml_response))
                 self.insert_chat_log(now, message, aiml_response)
