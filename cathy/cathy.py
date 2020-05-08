@@ -125,10 +125,11 @@ class ChattyCathy:
             
             To prevent this, loop until it is done.
             """
-            try:
-                await self.discord_bot.change_presence(activity=discord.Game(name='Chatting with Humans'))
-            except Exception as e:
-                self.logger.error(f"[-] Error setting bot presence!! : {e}")
+            # Removing ability to set presence for now since it is causing all kinds of connection issues on Linode
+            # try:
+            #     await self.discord_bot.change_presence(activity=discord.Game(name='Chatting with Humans'))
+            # except Exception as e:
+            #     self.logger.error(f"[-] Error setting bot presence!! : {e}")
 
         @self.discord_bot.event
         async def on_message(message):
