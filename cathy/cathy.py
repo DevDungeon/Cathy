@@ -136,6 +136,9 @@ class ChattyCathy:
                 aiml_response = self.aiml_kernel.respond(message.content)
                 aiml_response = aiml_response.replace("://", "")
                 aiml_response = "%s: %s" % (message.author.mention, aiml_response)
+                aiml_response = aiml_response.encode('ascii', 'ignore')
+                if len(aiml_response) > 1800:  # Protect against discord message limit of 2000 chars
+                    aiml_response = aiml_response[0:1800]
 
                 self.logger.info("[%s] (%s) %s: %s\nResponse: %s" %
                                  (now.isoformat(), message.guild.name, message.author, message.content, aiml_response))
