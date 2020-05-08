@@ -125,6 +125,7 @@ class ChattyCathy:
                 self.logger.error("[-] Empty message received.")
                 return
 
+
             now = datetime.now()
 
             if message.content.startswith(self.BOT_PREFIX):
@@ -132,8 +133,14 @@ class ChattyCathy:
                 await self.discord_bot.process_commands(message)
                 return
 
+            # Clean out the message
+            text = message.content
+            for ch in  ['/', "'", ".", "\\", "(", ")", '"', '\n']:
+                text = text.replace(ch, '')
+
+
             try:
-                aiml_response = self.aiml_kernel.respond(message.content)
+                aiml_response = self.aiml_kernel.respond(text)
                 aiml_response = aiml_response.replace("://", "")
                 aiml_response = "%s: %s" % (message.author.mention, aiml_response)
                 aiml_response = aiml_response.encode('ascii', 'ignore')
@@ -141,7 +148,7 @@ class ChattyCathy:
                     aiml_response = aiml_response[0:1800]
 
                 self.logger.info("[%s] (%s) %s: %s\nResponse: %s" %
-                                 (now.isoformat(), message.guild.name, message.author, message.content, aiml_response))
+                                 (now.isoformat(), message.guild.name, message.author, text, aiml_response))
                 self.insert_chat_log(now, message, aiml_response)
 
                 async with message.channel.typing():
