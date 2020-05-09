@@ -40,6 +40,7 @@ class ChattyCathy:
         self.token = bot_token
         self.log_file = log_file
         self.database = database
+        self.message_count  = 0
         self.last_reset_time = datetime.now()
 
         # Log configuration
@@ -48,6 +49,7 @@ class ChattyCathy:
         self.logger.info("[+] Logging initialized")
 
         # Setup database
+        self.logger.info("[*] Initializing database...")
         self.db = sqlite3.connect(self.database)
         self.cursor = self.db.cursor()
         self.setup_database_schema()
@@ -92,6 +94,8 @@ class ChattyCathy:
         This method defines all of the bot command and hook callbacks
         :return:
         """
+        self.logger.info("[+] Setting up Discord events")
+
 
         @self.discord_bot.command()
         async def reset(ctx):
@@ -110,7 +114,6 @@ class ChattyCathy:
 
         @self.discord_bot.event
         async def on_ready():
-            print("Bot Online!")
             self.logger.info("[+] Bot connected to Discord")
             self.logger.info("[*] Name: {}".format(self.discord_bot.user.name))
             self.logger.info("[*] ID: {}".format(self.discord_bot.user.id))
@@ -126,13 +129,16 @@ class ChattyCathy:
             To prevent this, loop until it is done.
             """
             # Removing ability to set presence for now since it is causing all kinds of connection issues on Linode
-            # try:
-            #     await self.discord_bot.change_presence(activity=discord.Game(name='Chatting with Humans'))
-            # except Exception as e:
-            #     self.logger.error(f"[-] Error setting bot presence!! : {e}")
+            self.logger.info('[*] Attempting to set presence.')
+            try:
+                await self.discord_bot.change_presence(activity=discord.Game(name='Chatting with Humans'))
+            except Exception as e:
+                self.logger.error(f"[-] Error setting bot presence!! : {e}")
 
         @self.discord_bot.event
         async def on_message(message):
+            self.message_count += 1
+
             if message.author.bot or str(message.channel) != self.channel_name:
                 return
 
@@ -147,13 +153,14 @@ class ChattyCathy:
 
             # Clean out the message
             text = message.content
-            for ch in ['/', "'", ".", "\\", "(", ")", '"', '\n']:
-                text = text.replace(ch, '')
+            #for ch in ['/', "'", ".", "\\", "(", ")", '"', '\n']:
+            #    text = text.replace(ch, '')
 
             try:
                 aiml_response = self.aiml_kernel.respond(text)
                 aiml_response = aiml_response.replace("://", "")
-                aiml_response = "`@%s`: %s" % (message.author.name, aiml_response.encode('ascii', 'ignore').decode('ascii'))  # Remove any unicode to prevent errors/malforming)
+                #aiml_response = "`@%s`: %s" % (message.author.name, aiml_response.encode('ascii', 'ignore').decode('ascii'))  # Remove any unicode to prevent errors/malforming)
+                aiml_response = "`@%s`: %s" % (message.author.name, aiml_response)  # Remove any unicode to prevent errors/malforming)
 
                 if len(aiml_response) > 1800:  # Protect against discord message limit of 2000 chars
                     aiml_response = aiml_response[0:1800]
@@ -163,9 +170,9 @@ class ChattyCathy:
                                  (now.isoformat(), message.guild.name, message.author, text, aiml_response))
                 self.insert_chat_log(now, message, aiml_response)
 
-                async with message.channel.typing():
-                    await asyncio.sleep(random.randint(1, 3))
-                    await message.channel.send(aiml_response)
+                #async with message.channel.typing():
+                    #await asyncio.sleep(random.randint(1, 3))
+                await message.channel.send(aiml_response)
 
             except discord.HTTPException as e:
                 self.logger.error("[-] Discord HTTP Error: %s" % e)
