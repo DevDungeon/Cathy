@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='cathy',
-    version='3.4.0',
+    version='3.5.0',
     description='Discord chat bot using AIML artificial intelligence.',
     long_description="See https://github.com/DevDungeon/cathy",
     url='https://github.com/DevDungeon/ChattyCathy',
