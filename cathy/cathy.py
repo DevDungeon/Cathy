@@ -14,6 +14,8 @@ from discord.ext import commands
 import logging
 import logging.config
 import sqlite3
+from signal import signal, SIGINT, SIGTERM
+from sys import exit
 
 
 class ChattyCathy:
@@ -25,6 +27,10 @@ class ChattyCathy:
         'CREATE TABLE IF NOT EXISTS users (id, name, first_seen)',
         'CREATE TABLE IF NOT EXISTS servers (id, name, first_seen)',
     ]
+
+    def exit_handler(signal_received, frame):
+        self.logger.info(f"[*] Signal received ({signal_received})....Exiting.")
+        exit()
 
     def __init__(self, channel_name, bot_token, log_file, database):
         """
@@ -47,6 +53,11 @@ class ChattyCathy:
         self.logger = logging.getLogger('cathy_logger')
         self.setup_logging()
         self.logger.info("[+] Logging initialized")
+        self.logger.info("[+] Bot is now being initialized from __init__ function")
+
+        self.logger.info("[*] Setting up signal handlers")
+        signal(SIGINT, self.exit_handler)
+        signal(SIGTERM, self.exit_handler)
 
         # Setup database
         self.logger.info("[*] Initializing database...")
@@ -57,15 +68,19 @@ class ChattyCathy:
 
         # Load AIML kernel
         self.logger.info("[*] Initializing AIML kernel...")
+        start_time = datetime.now()
         self.aiml_kernel = aiml.Kernel()
         self.setup_aiml()
-        self.logger.info("[+] Done initializing AIML kernel.")
+        end_time = datetime.now()
+        self.logger.info(f"[+] Done initializing AIML kernel. Took {end_time-start_time}")
 
         # Set up Discord
         self.logger.info("[*] Initializing Discord bot...")
         self.discord_bot = commands.Bot(command_prefix=self.BOT_PREFIX)
         self.setup_discord_events()
         self.logger.info("[+] Done initializing Discord bot.")
+
+        self.logger.info("[+] Exiting __init__ function.")
 
     def setup_logging(self):
         self.logger.setLevel(logging.INFO)
@@ -114,7 +129,7 @@ class ChattyCathy:
 
         @self.discord_bot.event
         async def on_ready():
-            self.logger.info("[+] Bot connected to Discord")
+            self.logger.info("[+] Bot on_ready even fired. Connected to Discord")
             self.logger.info("[*] Name: {}".format(self.discord_bot.user.name))
             self.logger.info("[*] ID: {}".format(self.discord_bot.user.id))
 
@@ -129,11 +144,11 @@ class ChattyCathy:
             To prevent this, loop until it is done.
             """
             # Removing ability to set presence for now since it is causing all kinds of connection issues on Linode
-            self.logger.info('[*] Attempting to set presence.')
-            try:
-                await self.discord_bot.change_presence(activity=discord.Game(name='Chatting with Humans'))
-            except Exception as e:
-                self.logger.error(f"[-] Error setting bot presence!! : {e}")
+            #self.logger.info('[*] Attempting to set presence.')
+            #try:
+            #    await self.discord_bot.change_presence(activity=discord.Game(name='Chatting with Humans'))
+            #except Exception as e:
+            #    self.logger.error(f"[-] Error setting bot presence!! : {e}")
 
         @self.discord_bot.event
         async def on_message(message):
@@ -166,8 +181,8 @@ class ChattyCathy:
                     aiml_response = aiml_response[0:1800]
 
                 now = datetime.now()
-                self.logger.info("[%s] (%s) %s: %s\nResponse: %s" %
-                                 (now.isoformat(), message.guild.name, message.author, text, aiml_response))
+                #self.logger.info("[%s] (%s) %s: %s\nResponse: %s" %
+                #                 (now.isoformat(), message.guild.name, message.author, text, aiml_response))
                 self.insert_chat_log(now, message, aiml_response)
 
                 #async with message.channel.typing():
@@ -180,7 +195,7 @@ class ChattyCathy:
                 self.logger.error("[-] General Error: %s" % e)
 
     def run(self):
-        self.logger.info("[*] Attempting to run bot...")
+        self.logger.info("[*] Now calling run()")
         self.discord_bot.run(self.token)
         self.logger.info("[*] Bot run.")
 
