@@ -76,7 +76,7 @@ class ChattyCathy:
 
         # Set up Discord
         self.logger.info("[*] Initializing Discord bot...")
-        self.discord_bot = commands.Bot(command_prefix=self.BOT_PREFIX)
+        self.discord_bot = discord.AutoShardedClient()  # commands.Bot(command_prefix=self.BOT_PREFIX)
         self.setup_discord_events()
         self.logger.info("[+] Done initializing Discord bot.")
 
@@ -112,26 +112,28 @@ class ChattyCathy:
         self.logger.info("[+] Setting up Discord events")
 
 
-        @self.discord_bot.command()
-        async def reset(ctx):
-            """
-            Allow users to trigger a cathy reset up to once per hour. This can help when the bot quits responding.
-            :return:
-            """
-            now = datetime.now()
-            if datetime.now() - self.last_reset_time > timedelta(hours=1):
-                self.last_reset_time = now
-                await ctx.send('Resetting my brain...')
-                self.aiml_kernel.resetBrain()
-                self.setup_aiml()
-            else:
-                await ctx.send(f'Sorry, I can only reset once per hour and I was last reset on {self.last_reset_time} UTC')
+#       @self.discord_bot.command()
+#        async def reset(ctx):
+#            """
+#            Allow users to trigger a cathy reset up to once per hour. This can help when the bot quits responding.
+#            :return:
+#            """
+#            now = datetime.now()
+#            if datetime.now() - self.last_reset_time > timedelta(hours=1):
+#                self.last_reset_time = now
+#                await ctx.send('Resetting my brain...')
+#                self.aiml_kernel.resetBrain()
+#                self.setup_aiml()
+#            else:
+#                await ctx.send(f'Sorry, I can only reset once per hour and I was last reset on {self.last_reset_time} UTC')
 
         @self.discord_bot.event
         async def on_ready():
+
             self.logger.info("[+] Bot on_ready even fired. Connected to Discord")
             self.logger.info("[*] Name: {}".format(self.discord_bot.user.name))
             self.logger.info("[*] ID: {}".format(self.discord_bot.user.id))
+            self.logger.info(f"[*] Bot is on {len(self.discord_bot.guilds)} servers")
 
             """
             Sometimes the bot will fail to set the presence because it has not connected to all the guilds yet.
@@ -168,8 +170,8 @@ class ChattyCathy:
 
             # Clean out the message
             text = message.content
-            #for ch in ['/', "'", ".", "\\", "(", ")", '"', '\n']:
-            #    text = text.replace(ch, '')
+            for ch in ['@', '/', "'", ".", "\\", "(", ")", '"', '\n']:
+                text = text.replace(ch, '')
 
             try:
                 aiml_response = self.aiml_kernel.respond(text)
@@ -196,7 +198,10 @@ class ChattyCathy:
 
     def run(self):
         self.logger.info("[*] Now calling run()")
-        self.discord_bot.run(self.token)
+        try:
+            self.discord_bot.run(self.token)
+        except Exception as e:
+            self.logger.error(f'Error running Discord bot: {e}')
         self.logger.info("[*] Bot run.")
 
     def insert_chat_log(self, now, message, aiml_response):
