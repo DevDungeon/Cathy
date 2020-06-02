@@ -17,7 +17,7 @@ Documentation
 
 Read the documentation online at http://cathy-docs.rtfd.io/
 
-Optionally, build the documentation from the ``docs/`` folder::
+Optionally, to build the documentation yourself from the ``docs/`` folder::
 
   pip install sphinx
   cd docs/

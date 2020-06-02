@@ -1,6 +1,6 @@
 # Build with: `docker build . --tag cathy`
-# Run with: `docker run cathy`
-# Run with: `docker run cathy chat-with-cathy $TOKEN log.txt db.db`
+# Run with: `docker run cathy --help`
+# Run with: `docker run --env-file .env cathy`
 # Attach to a running container and get a shell
 # `docker exec -it <container_id> /bin/sh`
 FROM python:3.8.1-alpine
@@ -22,4 +22,4 @@ ENTRYPOINT ["cathy"]
 
 # Default args for entrypoint if none are provided to `docker run`.
 # The CMD is executed directly if no ENTRYPOINT present.
-CMD ["--help"]
+CMD [""]

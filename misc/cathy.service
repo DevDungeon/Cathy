@@ -1,5 +1,5 @@
 # Systemd service file for Cathy
-# Copy it to /etc/systemd/system/cathy.service
+# Copy it to /etc/misc/system/cathy.service
 # Control it with: systemctl start|stop|status cathy
 
 [Unit]
@@ -10,7 +10,7 @@ After=network.target
 Type=simple
 User=cathy
 WorkingDirectory=/opt/cathy
-ExecStart=/usr/local/bin/runcathy.sh
+ExecStart=/opt/cathy/venv/bin/python -m cathy
 Restart=always
 
 [Install]

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='cathy',
-    version='3.5.0',
+    version='4.0.0',
     description='Discord chat bot using AIML artificial intelligence.',
     long_description="See https://github.com/DevDungeon/cathy",
     url='https://github.com/DevDungeon/ChattyCathy',
@@ -30,7 +30,6 @@ setup(
         'certifi==2019.11.28',
         'chardet==3.0.4',
         'discord.py==1.3.1',
-        'docopt==0.6.2',
         'idna==2.9',
         'multidict==4.7.5',
         'python-aiml==0.9.3',
@@ -38,6 +37,7 @@ setup(
         'urllib3==1.25.8',
         'websockets==8.1',
         'yarl==1.4.2',
+        'python-dotenv',
     ],
     python_requires='>=3.7',
 )

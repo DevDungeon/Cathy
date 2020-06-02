@@ -30,30 +30,17 @@ You can also invoke it as a Python module directly::
 
     python -m cathy --help
 
-Usage
-=====
+It expects three environment variables to be present. You can pass them like normal
+or create a `.env` file in your working directory. See the example in ``misc/example.env``.
 
-Usage information::
-
-    Usage:
-      cathy <channel> <token> <logfile> <database>
-
-    Options:
-      <channel>     Name of Discord channel to chat in. E.g. "general"
-      <token>       Bot's Discord API token
-      <logfile>     Path for log file. E.g. "/opt/cathy/cathy.log"
-      <database>    Path for database file. E.g. "/opt/cathy/cathy.db"
-      -h --help     Show this screen.
-
-Example usage::
-
-    # Enter the channel name with no # sign
-    cathy chat-with-cathy "XXSECRETTOKENXX" /opt/cathy/cathy.log /opt/cathy/cathy.db
+- ``DISCORD_TOKEN`` - Your bot's Discord token from https://discord.com/developers/applications/
+- ``DISCORD_CHANNEL`` - Channel to chat in. e.g. ``chat-with-cathy``
+- ``DATABASE`` - Path to SQLite3 database file. It will be created if it does not exist.
 
 Set up a Linux systemd service
 ==============================
 
-Use the service file in `systemd/cathy.service` as a template. Set up cathy as normal, and then
+Use the service file in ``misc/cathy.service`` as a template. Set up cathy as normal, and then
 modify the systemd service file as needed
 and copy or symlink it to `/etc/systemd/system/cathy.service` and then you can manage
 the service with::
@@ -69,14 +56,14 @@ Build the image first by running docker build from the root project directory::
 
     docker build . --tag cathy
 
-Then run it with::
+Then run it, passing in the environment variables file::
 
-    docker run cathy
+    docker run --env-file .env cathy
 
 Getting a token
 ===============
 
-If you don't already know how to get a token, you need to follow a few steps:
+If you don't already have a bot token, you need to follow a few steps:
 
 - Create an application at https://discordapp.com/developers/applications/
 - In the application, go to Bot tab.
