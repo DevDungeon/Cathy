@@ -106,3 +106,4 @@ ENV/
 .mypy_cache/
 *.db
 *.log
+.DS_Store
