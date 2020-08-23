@@ -8,8 +8,8 @@ Artificial intelligence (AI) chat bot for Discord written in Python
    :caption: Overview
 
    pages/getting-started
-   pages/chat-with-existing-bot
    pages/invite-to-your-server
+   pages/chat-with-existing-bot
    pages/setup-your-own-bot
 
 
@@ -17,8 +17,8 @@ Links
 =====
 
 * :ref:`search`
+* Invite Cathy: https://cathy.devdungeon.com/invite/
+* Home page: https://cathy.devdungeon.com/
 * Source code: https://github.com/DevDungeon/ChattyCathy
-* Home page: https://www.devdungeon.com/content/chatty-cathy
-* AIML Tutorial: https://www.devdungeon.com/content/ai-chat-bot-python-aiml
-* Live Demo: https://discord.gg/unSddKm
-* Contact: nanodano@devdungeon.com
+* Chat with Cathy on DevDungeon server: https://discord.gg/unSddKm
+* Contact: cathy@devdungeon.com

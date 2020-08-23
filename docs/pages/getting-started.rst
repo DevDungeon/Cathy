@@ -1,16 +1,22 @@
-=====================
-What is Cathy?
-=====================
+==============================
+Get started with Cathy chatbot
+==============================
 
-Cathy is an artificial intelligence (AI) chat bot for Discord server.
-It written in Python 3 and is easily extended with new commands.
-You can invite the DevDungeon Cathy to your server or run your own version.
+Cathy is an artificial intelligence (AI) chat bot for Discord servers.
+Follow these instructions to start chatting with Cathy.
 
-The chat bot intelligence is powered by AIML.
-It comes packaged by default with the Alice bot set of XML files.
-You can also add your own AIML files to modify the chat behavior in the
-`cathy/aiml/custom/` folder. You can follow these tutorials to learn more about
-using AIML with Python:
+1) Invite
+=========
 
-- https://www.devdungeon.com/content/live-coding-discord-ai-chat-bots-python
-- https://www.devdungeon.com/content/ai-chat-bot-python-aiml
+First, invite Cathy to your server by visiting https://cathy.devdungeon.com/invite/
+You must be an owner or admin to invite. Share the link with a server admin if you cannot invite yourself.
+
+2) Create the #chat-with-cathy channel
+======================================
+
+You must create a channel named `#chat-with-cathy` if it does not exist.
+
+3) Chat
+=======
+
+Chat in the `#chat-with-cathy` channel. Cathy will respond to anyone in this channel.

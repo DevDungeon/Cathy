@@ -80,5 +80,25 @@ How can I create my own bot?
 If you want to create your own bot, you can follow some of these tutorials on
 DevDungeon.com
 
+
+Learn more
+==========
+
+Learn how to make your own bots by following some of my tutorials:
+
+- https://www.devdungeon.com/content/live-coding-discord-ai-chat-bots-python
+- https://www.devdungeon.com/content/ai-chat-bot-python-aiml
 - https://www.devdungeon.com/tags/aiml
 - https://www.devdungeon.com/tags/discord
+
+
+
+AIML files
+==========
+
+The chat bot intelligence is powered by AIML.
+
+It comes packaged by default with the Alice bot set of XML files.
+
+You can also add your own AIML files to modify the chat behavior in the
+`cathy/aiml/custom/` folder.
