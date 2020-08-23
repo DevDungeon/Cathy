@@ -1,6 +1,6 @@
-======================
-Chat with existing bot
-======================
+====================================
+Chat with Cathy on DevDungeon server
+====================================
 
 You can join the DevDungeon.com Discord server and chat with the bot in the ``#chat-with-cathy`` channel.
 
