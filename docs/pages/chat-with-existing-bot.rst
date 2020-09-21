@@ -1,7 +1,7 @@
 ====================================
-Chat with Cathy on DevDungeon server
+Chat with Mr. Forbes on Official Zsas' server
 ====================================
 
-You can join the DevDungeon.com Discord server and chat with the bot in the ``#chat-with-cathy`` channel.
+You can chat with the bot in the ``#chat-with-forbes`` channel.
 
-Use this link to join the Discord server: https://discord.gg/unSddKm
+Use this link to join the Official Discord server: https://discord.gg/cvgvC6W
