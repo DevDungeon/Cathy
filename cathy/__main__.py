@@ -5,6 +5,11 @@ from cathy import Cathy
 
 
 def print_usage():
+    """
+    Print usage. usage.
+
+    Args:
+    """
     print("Usage:")
     print("  cathy")
     print("DISCORD_TOKEN, DATABASE, DISCORD_CHANNEL should be environment variables.")
@@ -14,6 +19,11 @@ def print_usage():
 
 
 def main():  # If called by entrypoint
+    """
+    Main entry point.
+
+    Args:
+    """
     if '--help' in argv or '-h' in argv:
         print_usage()
         exit()
