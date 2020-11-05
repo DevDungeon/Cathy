@@ -22,6 +22,13 @@ class Cathy:
     ]
 
     def exit_handler(signal_received, frame):
+        """
+        Exit a signal handler.
+
+        Args:
+            signal_received: (todo): write your description
+            frame: (todo): write your description
+        """
         logging.info(f"[*] Signal received ({signal_received})....Exiting.")
         exit()
 
@@ -67,11 +74,23 @@ class Cathy:
         logging.info("[+] Exiting __init__ function.")
 
     def setup_database_schema(self):
+        """
+        Creates the sqlite database.
+
+        Args:
+            self: (todo): write your description
+        """
         for sql_statement in self.SQL_SCHEMA:
             self.cursor.execute(sql_statement)
         self.db.commit()
 
     def setup_aiml(self):
+        """
+        Setup the kernel.
+
+        Args:
+            self: (todo): write your description
+        """
         initial_dir = os.getcwd()
         os.chdir(pkg_resources.resource_filename(__name__, ''))  # Change directories to load AIML files properly
         startup_filename = pkg_resources.resource_filename(__name__, self.STARTUP_FILE)
@@ -104,12 +123,23 @@ class Cathy:
 
         @self.discord_bot.event
         async def on_ready():
+              """
+              Discard the bot.
+
+              Args:
+              """
             logging.info("[+] Bot on_ready even fired. Connected to Discord")
             logging.info("[*] Name: {}".format(self.discord_bot.user.name))
             logging.info("[*] ID: {}".format(self.discord_bot.user.id))
 
         @self.discord_bot.event
         async def on_message(message):
+              """
+              The on_message event handler for this module
+
+              Args:
+                  message: (str): write your description
+              """
             self.message_count += 1
 
             if message.author.bot or str(message.channel) != self.channel_name:
@@ -148,11 +178,26 @@ class Cathy:
                 logging.error("[-] General Error: %s" % e)
 
     def run(self):
+        """
+        Run the bot.
+
+        Args:
+            self: (todo): write your description
+        """
         logging.info("[*] Now calling run()")
         self.discord_bot.run(self.token)
         logging.info("[*] Bot finished running.")
 
     def insert_chat_log(self, now, message, aiml_response):
+        """
+        Use this method to log to the message.
+
+        Args:
+            self: (todo): write your description
+            now: (todo): write your description
+            message: (str): write your description
+            aiml_response: (todo): write your description
+        """
         self.cursor.execute('INSERT INTO chat_log VALUES (?, ?, ?, ?, ?)',
                             (now.isoformat(), message.guild.id, message.author.id,
                              str(message.content), aiml_response))
