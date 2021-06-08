@@ -110,6 +110,7 @@ class Cathy:
 
         @self.discord_bot.event
         async def on_message(message):
+            sessionID = message.author.id # Change to message.guild.id if you want it to be for guilds
             self.message_count += 1
 
             if message.author.bot or str(message.channel) != self.channel_name:
@@ -122,6 +123,8 @@ class Cathy:
             if message.content.startswith('!reset'):
                 await self.reset(message)
                 return
+            if message.content.lower() == "client info":
+                await message.channel.send(self.aiml_kernel.getSessionData(sessionID))
 
             # Clean out the message to prevent issues
             text = message.content
@@ -129,7 +132,7 @@ class Cathy:
                 text = text.replace(ch, '')
 
             try:
-                aiml_response = self.aiml_kernel.respond(text)
+                aiml_response = self.aiml_kernel.respond(text, sessionID=sessionID)
                 aiml_response = aiml_response.replace("://", "")
                 aiml_response = aiml_response.replace("@", "")  # Prevent tagging and links
                 aiml_response = "`@%s`: %s" % (message.author.name, aiml_response)  # Remove unicode to prevent errors
