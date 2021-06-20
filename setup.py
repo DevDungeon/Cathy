@@ -35,7 +35,7 @@ setup(
         'python-aiml==0.9.3',
         'requests==2.23.0',
         'urllib3==1.25.8',
-        'websockets==8.1',
+        'websockets==9.1',
         'yarl==1.4.2',
         'python-dotenv',
     ],
