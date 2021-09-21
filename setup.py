@@ -34,7 +34,7 @@ setup(
         'multidict==4.7.5',
         'python-aiml==0.9.3',
         'requests==2.23.0',
-        'urllib3==1.25.8',
+        'urllib3==1.26.5',
         'websockets==8.1',
         'yarl==1.4.2',
         'python-dotenv',
